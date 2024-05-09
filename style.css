@@ -1,0 +1,27 @@
+.weather-app {
+	max-width: 400px;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: #f7f7f7;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#city {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+#get-weather {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#weather-data {
+	margin-top: 20px;
+}

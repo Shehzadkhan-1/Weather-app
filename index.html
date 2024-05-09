@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="weather-app">
+        <h1>Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button id="get-weather">Get Weather</button>
+        <div id="weather-data"></div>
+    </div>
+    <script>
+        const apiKey = '559a2ca621515e03cc943acbdc917db6'; // Replace with your actual API key
+        const cityInput = document.getElementById('city');
+        const getWeatherButton = document.getElementById('get-weather');
+        const weatherDataDiv = document.getElementById('weather-data');
+
+        getWeatherButton.addEventListener('click', () => {
+            const city = cityInput.value;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const weatherData = `
+                        <h2>Weather in ${city}</h2>
+                        <p>Temperature: ${data.main.temp}°C</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                        <p>Weather: ${data.weather[0].description}</p>
+                    `;
+                    weatherDataDiv.innerHTML = weatherData;
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    weatherDataDiv.innerHTML = `<p>Failed to fetch weather data. Please try again later.</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
